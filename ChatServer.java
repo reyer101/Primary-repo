@@ -41,9 +41,9 @@ class UDPServer {
     InetAddress IPAddress1;
     InetAddress IPAddress2;
 
-    int port = null;  // Switcehs b/w port1 and port2
-    int port1 = null;
-    int port2 = null;
+    int port = 0;  // Switcehs b/w port1 and port2
+    int port1 = 0;
+    int port2 = 0;
 
     byte[] receiveData = new byte[1024];
     byte[] sendData  = new byte[1024];
@@ -152,7 +152,7 @@ class UDPServer {
 
           /* If a client sends a "Goodbye" message, server/client communication
           closes. */
-          if(message.length >= 7 && message.substring(0,7) == "Goodbye")
+          if(receiveMessage.length >= 7 && receiveMessage.substring(0,7) == "Goodbye")
           {
             state = 3;
             break;
