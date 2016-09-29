@@ -1,11 +1,14 @@
 /**
-*	UDP Server Program
-*	Listens on a UDP port
-*	Receives a line of input from a UDP client
-*	Returns an upper case version of the line to the client
+*	Chat Server Program
+*	Listens on two (2) UDP ports
+*	Receives a line of input from one of two clients (Red and Blue) at a time
+* Saves name, IP address, and port number of each client
+*	Returns a message from one client to the other
+* Closes socket after one client inputs "Goodbye" message
 *
 *	@author: Sean Keelan
-@	version: 2.0
+* Partner: Alec Reyerson
+* @	version: 2.0
 */
 
 import java.io.*;
@@ -65,18 +68,23 @@ class ChatServer {
           serverSocket.receive(receivePacket);
 
           receiveMessage = new String(receivePacket.getData());
-          if(receiveMessage.substring(0,5) == "HELLO")
+          //System.out.println(receiveMessage);
+          //System.out.println("0,5: "+ receiveMessage.substring(0,5));
+          //System.out.println("6,9: " +receiveMessage.substring(6,9));
+          if(receiveMessage.substring(0,5).equals("HELLO"))
           {
-            if(receiveMessage.substring(6,9) == "Red")
+            if(receiveMessage.substring(6,9).equals("Red"))
             {
               clientName1 = new String("Red");
+              //System.out.println("Red");
             }
-            else if(receiveMessage.substring(6,10) == "Blue")
+            else if(receiveMessage.substring(6,10).equals("Blue"))
             {
               clientName1 = new String("Blue");
             }
-            else
+            else  // If the user does not enter neither Red nor Blue
             {
+              //System.out.println("I'm here");
               IPAddress1 = receivePacket.getAddress();
               port1 = receivePacket.getPort();
               sendMessage = new String("Invalid username. Choose between Red or Blue.");
@@ -102,13 +110,15 @@ class ChatServer {
           serverSocket.receive(receivePacket);
 
           receiveMessage = new String(receivePacket.getData());
-          if(receiveMessage.substring(0,5) == "HELLO")
+          if(receiveMessage.substring(0,5).equals("HELLO"))
           {
-            if(receiveMessage.substring(6,9) == "Red" && clientName1 == "Blue")
+            // If name "Blue" is already taken
+            if(receiveMessage.substring(6,9).equals("Red") && clientName1.equals("Blue"))
             {
               clientName2 = new String("Red");
             }
-            else if(receiveMessage.substring(6,10) == "Blue" && clientName1 == "Red")
+            // If name "Red" is already taken
+            else if(receiveMessage.substring(6,10).equals("Blue") && clientName1.equals("Red"))
             {
               clientName2 = new String("Blue");
             }
@@ -144,7 +154,7 @@ class ChatServer {
           state = 2;
           break;
 
-        case 2:
+        case 2: // Remain in this state until one of the users enters "Goodbye"
           receivePacket = new DatagramPacket(receiveData, receiveData.length);
           serverSocket.receive(receivePacket);
 
@@ -152,7 +162,7 @@ class ChatServer {
 
           /* If a client sends a "Goodbye" message, server/client communication
           closes. */
-          if(receiveMessage.length() >= 7 && receiveMessage.substring(0,7) == "Goodbye")
+          if(receiveMessage.length() >= 7 && receiveMessage.substring(0,7).equals("Goodbye"))
           {
             state = 3;
             break;
@@ -161,14 +171,16 @@ class ChatServer {
           IPAddress = receivePacket.getAddress();
           port = receivePacket.getPort();
 
-          if(port == port1 && (IPAddress.equals(IPAddress1)))
+          if(port == port1 && (IPAddress.equals(IPAddress1))) // If Client 1 is sending message
           {
+            // Prepare to send to Client 2
             clientName = clientName1;
             IPAddress = IPAddress2;
             port = port2;
           }
-          else
+          else  // If Client 2 is sending message
           {
+            // Prepare to send to Client 1
             clientName = clientName2;
             IPAddress = IPAddress1;
             port = port1;
@@ -188,12 +200,12 @@ class ChatServer {
 
     //Sending "Goodbye" to Client 1
     sendPacket = new DatagramPacket(sendData, sendData.length,
-                                    IPAddress1, port);
+                                    IPAddress1, port1);
     serverSocket.send(sendPacket);
 
     // Sending "Goodbye" to Client 2
     sendPacket = new DatagramPacket(sendData, sendData.length,
-                                    IPAddress2, port);
+                                    IPAddress2, port2);
     serverSocket.send(sendPacket);
 
     serverSocket.close();
