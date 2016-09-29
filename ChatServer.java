@@ -37,9 +37,9 @@ class UDPServer {
     String clientName1 = "";
     String clientName2 = "";
 
-    InetAddress IPAddress;  // Switches between IPAddress1 and IPAddress 2
-    InetAddress IPAddress1;
-    InetAddress IPAddress2;
+    InetAddress IPAddress = null;  // Switches between IPAddress1 and IPAddress 2
+    InetAddress IPAddress1 = null;
+    InetAddress IPAddress2 = null;
 
     int port = 0;  // Switcehs b/w port1 and port2
     int port1 = 0;
