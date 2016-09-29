@@ -6,6 +6,7 @@
 * 	If the client is the second to connect or a response has been received, the client then sends messages to the sever until "Goodbye"
 *
 *	@author: Alec Reyerson
+*	Partner: Sean Keelan
 *	@version: 2.1
 */
 
