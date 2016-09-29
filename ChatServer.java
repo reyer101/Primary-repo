@@ -5,7 +5,8 @@
 *	Returns an upper case version of the line to the client
 *
 *	@author: Sean Keelan
-@	version: 2.0
+* Partner: Alec Reyerson
+* @	version: 2.0
 */
 
 import java.io.*;
@@ -65,18 +66,23 @@ class ChatServer {
           serverSocket.receive(receivePacket);
 
           receiveMessage = new String(receivePacket.getData());
-          if(receiveMessage.substring(0,5) == "HELLO")
+          //System.out.println(receiveMessage);
+          //System.out.println("0,5: "+ receiveMessage.substring(0,5));
+          //System.out.println("6,9: " +receiveMessage.substring(6,9));
+          if(receiveMessage.substring(0,5).equals("HELLO"))
           {
-            if(receiveMessage.substring(6,9) == "Red")
+            if(receiveMessage.substring(6,9).equals("Red"))
             {
               clientName1 = new String("Red");
+              //System.out.println("Red");
             }
-            else if(receiveMessage.substring(6,10) == "Blue")
+            else if(receiveMessage.substring(6,10).equals("Blue"))
             {
               clientName1 = new String("Blue");
             }
             else
             {
+              System.out.println("I'm here");
               IPAddress1 = receivePacket.getAddress();
               port1 = receivePacket.getPort();
               sendMessage = new String("Invalid username. Choose between Red or Blue.");
@@ -102,13 +108,13 @@ class ChatServer {
           serverSocket.receive(receivePacket);
 
           receiveMessage = new String(receivePacket.getData());
-          if(receiveMessage.substring(0,5) == "HELLO")
+          if(receiveMessage.substring(0,5).equals("HELLO"))
           {
-            if(receiveMessage.substring(6,9) == "Red" && clientName1 == "Blue")
+            if(receiveMessage.substring(6,9).equals("Red") && clientName1.equals("Blue"))
             {
               clientName2 = new String("Red");
             }
-            else if(receiveMessage.substring(6,10) == "Blue" && clientName1 == "Red")
+            else if(receiveMessage.substring(6,10).equals("Blue") && clientName1.equals("Red"))
             {
               clientName2 = new String("Blue");
             }
@@ -152,7 +158,7 @@ class ChatServer {
 
           /* If a client sends a "Goodbye" message, server/client communication
           closes. */
-          if(receiveMessage.length() >= 7 && receiveMessage.substring(0,7) == "Goodbye")
+          if(receiveMessage.length() >= 7 && receiveMessage.substring(0,7).equals("Goodbye"))
           {
             state = 3;
             break;
@@ -188,12 +194,12 @@ class ChatServer {
 
     //Sending "Goodbye" to Client 1
     sendPacket = new DatagramPacket(sendData, sendData.length,
-                                    IPAddress1, port);
+                                    IPAddress1, port1);
     serverSocket.send(sendPacket);
 
     // Sending "Goodbye" to Client 2
     sendPacket = new DatagramPacket(sendData, sendData.length,
-                                    IPAddress2, port);
+                                    IPAddress2, port2);
     serverSocket.send(sendPacket);
 
     serverSocket.close();
