@@ -152,7 +152,7 @@ class UDPServer {
 
           /* If a client sends a "Goodbye" message, server/client communication
           closes. */
-          if(receiveMessage.length >= 7 && receiveMessage.substring(0,7) == "Goodbye")
+          if(receiveMessage.length() >= 7 && receiveMessage.substring(0,7) == "Goodbye")
           {
             state = 3;
             break;
