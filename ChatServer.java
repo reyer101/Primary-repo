@@ -61,7 +61,7 @@ class UDPServer {
       switch(state)
       {
         case 0:
-          receivePacket = new DatagramPacket(receiveData, receiveData.length)
+          receivePacket = new DatagramPacket(receiveData, receiveData.length);
           serverSocket.receive(receivePacket);
 
           receiveMessage = new String(receivePacket.getData());
@@ -98,7 +98,7 @@ class UDPServer {
           break;
 
         case 1:
-          receivePacket = new DatagramPacket(receiveData, receiveData.length)
+          receivePacket = new DatagramPacket(receiveData, receiveData.length);
           serverSocket.receive(receivePacket);
 
           receiveMessage = new String(receivePacket.getData());
@@ -192,7 +192,7 @@ class UDPServer {
     serverSocket.send(sendPacket);
 
     // Sending "Goodbye" to Client 2
-    sendPacket = new Datagram Packet(sendData, sendData.length,
+    sendPacket = new DatagramPacket(sendData, sendData.length,
                                     IPAddress2, port);
     serverSocket.send(sendPacket);
 
