@@ -60,10 +60,10 @@ class Blue {
 				break;
 
 				case 1: // Waiting for notification that the second client is ready
-					System.out.println("In case 1:");
+					//System.out.println("In case 1:");
 					while(!response.substring(0,3).equals("200"))
 					{
-						System.out.println("In loop case 1");
+						//System.out.println("In loop case 1");
 						receivePacket = new DatagramPacket(receiveData, receiveData.length);
 
 	      				clientSocket.receive(receivePacket);
@@ -81,7 +81,7 @@ class Blue {
 					state = 2; //transition to state 2: chat mode
 					break;
 				case 2:
-					System.out.println("In case 2:");
+					//System.out.println("In case 2:");
 					//Chat mode					
 					//Chat mode //receive message from other client
 					response = "";					

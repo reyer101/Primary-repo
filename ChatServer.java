@@ -84,7 +84,11 @@ class ChatServer {
             }
             else  // If the user does not enter neither Red nor Blue
             {
+<<<<<<< HEAD
               //System.out.println("I'm here");
+=======
+              System.out.println("I'm here");
+>>>>>>> 349ecd79b0c9d5336ff3645fed52a5588cb30036
               IPAddress1 = receivePacket.getAddress();
               port1 = receivePacket.getPort();
               sendMessage = new String("Invalid username. Choose between Red or Blue.");
@@ -112,12 +116,18 @@ class ChatServer {
           receiveMessage = new String(receivePacket.getData());
           if(receiveMessage.substring(0,5).equals("HELLO"))
           {
+<<<<<<< HEAD
             // If name "Blue" is already taken
+=======
+>>>>>>> 349ecd79b0c9d5336ff3645fed52a5588cb30036
             if(receiveMessage.substring(6,9).equals("Red") && clientName1.equals("Blue"))
             {
               clientName2 = new String("Red");
             }
+<<<<<<< HEAD
             // If name "Red" is already taken
+=======
+>>>>>>> 349ecd79b0c9d5336ff3645fed52a5588cb30036
             else if(receiveMessage.substring(6,10).equals("Blue") && clientName1.equals("Red"))
             {
               clientName2 = new String("Blue");
