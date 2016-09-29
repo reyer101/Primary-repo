@@ -11,7 +11,7 @@
 import java.io.*;
 import java.net.*;
 
-class UDPServer {
+class ChatServer {
   public static void main(String args[]) throws Exception
   {
     DatagramSocket serverSocket = null;
