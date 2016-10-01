@@ -3,7 +3,7 @@ Name of Reviewer: Matthew Shiroma
 Name of Programmer: Alec Reyerson
 Date of Review: 9/30/16
 
-On a scale of 1 to 5, I give this code a rating of 4 based on the following criteria:
+On a scale of 1 to 5, I give this code a rating of 5 based on the following criteria:
 
 1  The program has syntax errors and does not compile
 2  The program compiles successfully but generates runtime errors
