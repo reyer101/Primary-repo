@@ -1,10 +1,8 @@
 /**
-*	Chat Server Program
-*	Listens on two (2) UDP ports
-*	Receives a line of input from one of two clients (Red and Blue) at a time
-* Saves name, IP address, and port number of each client
-*	Returns a message from one client to the other
-* Closes socket after one client inputs "Goodbye" message
+*	UDP Server Program
+*	Listens on a UDP port
+*	Receives a line of input from a UDP client
+*	Returns an upper case version of the line to the client
 *
 *	@author: Sean Keelan
 * Partner: Alec Reyerson
@@ -82,13 +80,9 @@ class ChatServer {
             {
               clientName1 = new String("Blue");
             }
-            else  // If the user does not enter neither Red nor Blue
+            else
             {
-<<<<<<< HEAD
-              //System.out.println("I'm here");
-=======
               System.out.println("I'm here");
->>>>>>> 349ecd79b0c9d5336ff3645fed52a5588cb30036
               IPAddress1 = receivePacket.getAddress();
               port1 = receivePacket.getPort();
               sendMessage = new String("Invalid username. Choose between Red or Blue.");
@@ -116,18 +110,10 @@ class ChatServer {
           receiveMessage = new String(receivePacket.getData());
           if(receiveMessage.substring(0,5).equals("HELLO"))
           {
-<<<<<<< HEAD
-            // If name "Blue" is already taken
-=======
->>>>>>> 349ecd79b0c9d5336ff3645fed52a5588cb30036
             if(receiveMessage.substring(6,9).equals("Red") && clientName1.equals("Blue"))
             {
               clientName2 = new String("Red");
             }
-<<<<<<< HEAD
-            // If name "Red" is already taken
-=======
->>>>>>> 349ecd79b0c9d5336ff3645fed52a5588cb30036
             else if(receiveMessage.substring(6,10).equals("Blue") && clientName1.equals("Red"))
             {
               clientName2 = new String("Blue");
@@ -164,7 +150,7 @@ class ChatServer {
           state = 2;
           break;
 
-        case 2: // Remain in this state until one of the users enters "Goodbye"
+        case 2:
           receivePacket = new DatagramPacket(receiveData, receiveData.length);
           serverSocket.receive(receivePacket);
 
@@ -181,16 +167,14 @@ class ChatServer {
           IPAddress = receivePacket.getAddress();
           port = receivePacket.getPort();
 
-          if(port == port1 && (IPAddress.equals(IPAddress1))) // If Client 1 is sending message
+          if(port == port1 && (IPAddress.equals(IPAddress1)))
           {
-            // Prepare to send to Client 2
             clientName = clientName1;
             IPAddress = IPAddress2;
             port = port2;
           }
-          else  // If Client 2 is sending message
+          else
           {
-            // Prepare to send to Client 1
             clientName = clientName2;
             IPAddress = IPAddress1;
             port = port1;
